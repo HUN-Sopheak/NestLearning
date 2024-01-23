@@ -16,7 +16,7 @@ import { User } from './users/entities/user.entity';
       database: process.env.DB_DATABASE,
       entities: [User],
       autoLoadEntities: false,
-      synchronize: true,
+      synchronize: true, //DON't using in production
     }),
     UsersModule,
   ],
