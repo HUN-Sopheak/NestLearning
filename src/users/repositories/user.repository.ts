@@ -1,11 +1,11 @@
 import { CreateUserDto } from './../dto/create-user.dto';
-import { Injectable, Repository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
 import { User } from '../entities/user.entity';
 import { IUserRepository } from './user.repository.interface';
 
-@Injectable()
+@EntityRepository(User)
 export class UserRepository extends Repository<User> implements IUserRepository {
-
+    
     async createUser(user: User): Promise<User> {
         return this.save(user);
     }
