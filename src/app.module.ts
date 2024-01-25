@@ -1,5 +1,6 @@
+import { Module, ValidationPipe } from '@nestjs/common';
+import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
-import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
@@ -16,11 +17,16 @@ import { User } from './users/entities/user.entity';
       database: process.env.DB_DATABASE,
       entities: [User],
       autoLoadEntities: false,
-      synchronize: true, //DON't using in production
+      synchronize: true, // Only for development, use migrations in production
     }),
     UsersModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PIPE,
+      useClass: ValidationPipe,
+    },
+  ],
 })
 export class AppModule {}
