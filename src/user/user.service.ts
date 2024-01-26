@@ -1,3 +1,4 @@
+import { UpdateUserDto } from './dto/update-user.dto';
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -21,5 +22,13 @@ export class UserService {
 
   findOne(id: number) {
     return this.UserRepository.findOneBy({ id });
+  }
+
+  async update(id: number, UpdateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.findOne(id);
+
+    Object.assign(user, UpdateUserDto);
+
+    return await this.UserRepository.save(user);
   }
 }
