@@ -2,8 +2,8 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_PIPE } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { User } from './users/entities/user.entity';
+import { UserModule } from './user/user.module';
+import { User } from './user/entities/user.entity';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { User } from './users/entities/user.entity';
       autoLoadEntities: false,
       synchronize: true, // Only for development, use migrations in production
     }),
-    UsersModule,
+    UserModule,
   ],
   controllers: [],
   providers: [
