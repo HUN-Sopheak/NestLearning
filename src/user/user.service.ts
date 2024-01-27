@@ -31,4 +31,9 @@ export class UserService {
 
     return await this.UserRepository.save(user);
   }
+
+  async deleteUser(id: number) {
+    const user = await this.findOne(id);
+    return this.UserRepository.softDelete(user);
+  }
 }
